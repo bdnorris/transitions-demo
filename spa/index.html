@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPA View Transitions — Demo</title>
+  <link rel="stylesheet" href="/styles/shared.css">
+  <link rel="stylesheet" href="/spa/styles.css">
+</head>
+<body>
+  <div class="demo-shell">
+    <nav class="demo-nav">
+      <a href="/">← All demos</a>
+      <h1>Single-document transitions</h1>
+      <span class="tag">SPA</span>
+    </nav>
+
+    <div class="demo-content">
+      <p class="demo-intro">
+        Click a photo to open its detail view. The image and title morph between
+        layouts using named view transitions.
+      </p>
+
+      <div id="app"></div>
+    </div>
+  </div>
+
+  <script src="/spa/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destinations — Cross-document View Transitions</title>
+  <link rel="stylesheet" href="/styles/shared.css">
+  <link rel="stylesheet" href="/mpa/styles.css">
+</head>
+<body>
+  <div class="demo-shell">
+    <nav class="demo-nav">
+      <a href="/">← All demos</a>
+      <h1>Cross-document transitions</h1>
+      <span class="tag">MPA</span>
+    </nav>
+
+    <div class="demo-content">
+      <p class="demo-intro">
+        Each card links to a separate HTML document. Both pages opt in via
+        <code>@view-transition { navigation: auto }</code>, so the browser
+        animates the full navigation — including morphing the hero image and title.
+      </p>
+
+      <ul class="destinations">
+        <li>
+          <a class="destination-card" href="/mpa/aurora.html" data-dest="aurora">
+            <img
+              class="hero-image"
+              src=""
+              alt=""
+              data-color="#1a4d3e"
+              data-accent="#4ade80"
+            />
+            <div class="card-body">
+              <h2 class="hero-title">Northern Lights</h2>
+              <p>Tromsø, Norway</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="destination-card" href="/mpa/desert.html" data-dest="desert">
+            <img
+              class="hero-image"
+              src=""
+              alt=""
+              data-color="#5c3d1e"
+              data-accent="#fbbf24"
+            />
+            <div class="card-body">
+              <h2 class="hero-title">Desert Dunes</h2>
+              <p>Sahara, Morocco</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="destination-card" href="/mpa/coast.html" data-dest="coast">
+            <img
+              class="hero-image"
+              src=""
+              alt=""
+              data-color="#1e3a5f"
+              data-accent="#60a5fa"
+            />
+            <div class="card-body">
+              <h2 class="hero-title">Coastal Cliffs</h2>
+              <p>Big Sur, California</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="/mpa/shared.js"></script>
+  <script>
+    document.querySelectorAll(".hero-image[data-color]").forEach((img) => {
+      img.src = makePlaceholder(img.dataset.color, img.dataset.accent);
+    });
+  </script>
+</body>
+</html>

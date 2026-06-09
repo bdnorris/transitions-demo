@@ -1,0 +1,184 @@
+/* Opt this document into cross-document view transitions.
+   Both the outgoing and incoming pages need this rule for MPA transitions. */
+@view-transition {
+  navigation: auto;
+}
+
+.demo-intro {
+  color: var(--text-muted);
+  margin: 0 0 2rem;
+  font-size: 0.95rem;
+}
+
+/* Destination grid */
+
+.destinations {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.destination-card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s;
+}
+
+.destination-card:hover {
+  border-color: var(--accent);
+}
+
+.destination-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.destination-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.destination-card .card-body {
+  padding: 0.875rem 1rem;
+}
+
+.destination-card h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.destination-card p {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Detail page */
+
+.detail-page {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .detail-page {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+}
+
+.detail-hero {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.detail-hero img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.detail-info h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.detail-info .meta {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0 0 1.25rem;
+}
+
+.detail-info .description {
+  margin: 0 0 1.5rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1rem;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.back-link:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* -------------------------------------------------------------------------
+   Cross-document transition animations (MPA)
+   These run automatically on same-origin navigations between opted-in pages.
+   shared.js assigns view-transition-name on the clicked card; detail pages
+   set matching names in HTML so hero elements morph across documents.
+   ------------------------------------------------------------------------- */
+
+/* Outgoing page: fade up and shrink slightly */
+::view-transition-old(root) {
+  animation: slide-out 0.4s cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+/* Incoming page: fade up from below (slight delay for overlap) */
+::view-transition-new(root) {
+  animation: slide-in 0.4s cubic-bezier(0, 0, 0.2, 1) 0.1s both;
+}
+
+@keyframes slide-out {
+  to {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+}
+
+/* Shared-element morph: image/title on index card ↔ detail page hero */
+
+::view-transition-old(hero-image),
+::view-transition-new(hero-image) {
+  animation-duration: 0.55s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(hero-title),
+::view-transition-new(hero-title) {
+  animation-duration: 0.45s;
+}
+
+/* Respect the user's motion preference */
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

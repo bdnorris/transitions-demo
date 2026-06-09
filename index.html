@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Transition API Demo</title>
+  <link rel="stylesheet" href="styles/shared.css">
+</head>
+<body>
+  <main class="hub">
+    <header class="hub-header">
+      <p class="eyebrow">Web Platform Demo</p>
+      <h1>View Transition API</h1>
+      <p class="lead">
+        Animated transitions between DOM states in a single page, and between
+        separate documents on navigation.
+      </p>
+    </header>
+
+    <div class="demo-cards">
+      <a href="/spa/" class="demo-card">
+        <span class="demo-card-badge">SPA</span>
+        <h2>Single-document</h2>
+        <p>
+          Uses <code>document.startViewTransition()</code> to animate a gallery
+          grid into a detail view — including shared-element transitions via
+          <code>view-transition-name</code>.
+        </p>
+        <span class="demo-card-cta">Open demo →</span>
+      </a>
+
+      <a href="/mpa/" class="demo-card">
+        <span class="demo-card-badge">MPA</span>
+        <h2>Cross-document</h2>
+        <p>
+          Uses the <code>@view-transition</code> at-rule to opt pages into
+          animated navigation, with custom swipe and fade effects on
+          <code>::view-transition</code> pseudo-elements.
+        </p>
+        <span class="demo-card-cta">Open demo →</span>
+      </a>
+    </div>
+
+    <footer class="hub-footer">
+      <p>
+        Requires a browser with View Transition API support
+        (Chrome 111+ for SPA, Chrome 126+ for cross-document).
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API" target="_blank" rel="noopener">MDN docs</a>
+      </p>
+    </footer>
+  </main>
+</body>
+</html>

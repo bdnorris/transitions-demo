@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Northern Lights — Cross-document View Transitions</title>
+  <link rel="stylesheet" href="/styles/shared.css">
+  <link rel="stylesheet" href="/mpa/styles.css">
+</head>
+<body>
+  <div class="demo-shell">
+    <nav class="demo-nav">
+      <a href="/">← All demos</a>
+      <h1>Cross-document transitions</h1>
+      <span class="tag">MPA</span>
+    </nav>
+
+    <div class="demo-content">
+      <article class="detail-page">
+        <div class="detail-hero">
+          <img
+            class="hero-image"
+            style="view-transition-name: hero-image"
+            src=""
+            alt=""
+            data-color="#1a4d3e"
+            data-accent="#4ade80"
+          />
+        </div>
+        <div class="detail-info">
+          <h2 class="hero-title" style="view-transition-name: hero-title">Northern Lights</h2>
+          <p class="meta">Tromsø, Norway</p>
+          <p class="description">
+            Emerald curtains ripple across the Arctic sky. The charged particles from
+            the sun collide with atmospheric gases, painting the night in shifting
+            bands of green and violet.
+          </p>
+          <a class="back-link" href="/mpa/">← Back to destinations</a>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <script src="/mpa/shared.js"></script>
+  <script>
+    const img = document.querySelector(".hero-image");
+    img.src = makePlaceholder(img.dataset.color, img.dataset.accent);
+  </script>
+</body>
+</html>
