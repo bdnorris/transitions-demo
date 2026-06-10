@@ -115,7 +115,21 @@ code {
   color: var(--accent);
 }
 
-.demo-card h2 {
+.hub-section {
+  margin-bottom: 2.5rem;
+}
+
+.hub-section-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+}
+
+.demo-card h2,
+.demo-card h3 {
   margin: 0;
   font-size: 1.35rem;
 }

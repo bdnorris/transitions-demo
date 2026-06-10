@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carousel Scroll Snap — Demo</title>
+  <link rel="stylesheet" href="/styles/shared.css">
+  <link rel="stylesheet" href="/scroll/carousel/styles.css">
+</head>
+<body>
+  <div class="demo-shell">
+    <nav class="demo-nav">
+      <a href="/">← All demos</a>
+      <h1>Horizontal scroll snap</h1>
+      <span class="tag">Carousel</span>
+    </nav>
+
+    <div class="carousel-page">
+      <p class="demo-intro">
+        A horizontal scroll container with <code>scroll-snap-type: x mandatory</code>.
+        Drag, swipe, or use the arrows — each card snaps into place.
+      </p>
+
+      <div class="carousel-controls">
+        <button class="carousel-btn" type="button" id="prev" aria-label="Previous slide" disabled>←</button>
+        <span class="carousel-counter" id="counter" aria-live="polite">1 / 6</span>
+        <button class="carousel-btn" type="button" id="next" aria-label="Next slide">→</button>
+      </div>
+
+      <!--
+        Scroll container: overflow-x + scroll-snap-type creates the carousel.
+        Each .carousel-card is a snap target aligned to the start edge.
+      -->
+      <div class="carousel" id="carousel" tabindex="0" role="region" aria-label="Photo carousel">
+        <article class="carousel-card" style="--card-accent: #4ade80">
+          <div class="card-visual card-visual--1"></div>
+          <div class="card-body">
+            <h2>Northern Lights</h2>
+            <p>Tromsø, Norway</p>
+          </div>
+        </article>
+
+        <article class="carousel-card" style="--card-accent: #fbbf24">
+          <div class="card-visual card-visual--2"></div>
+          <div class="card-body">
+            <h2>Desert Dunes</h2>
+            <p>Sahara, Morocco</p>
+          </div>
+        </article>
+
+        <article class="carousel-card" style="--card-accent: #60a5fa">
+          <div class="card-visual card-visual--3"></div>
+          <div class="card-body">
+            <h2>Coastal Cliffs</h2>
+            <p>Big Sur, California</p>
+          </div>
+        </article>
+
+        <article class="carousel-card" style="--card-accent: #34d399">
+          <div class="card-visual card-visual--4"></div>
+          <div class="card-body">
+            <h2>Misty Forest</h2>
+            <p>Olympic Peninsula</p>
+          </div>
+        </article>
+
+        <article class="carousel-card" style="--card-accent: #c084fc">
+          <div class="card-visual card-visual--5"></div>
+          <div class="card-body">
+            <h2>City at Dusk</h2>
+            <p>Tokyo, Japan</p>
+          </div>
+        </article>
+
+        <article class="carousel-card" style="--card-accent: #22d3ee">
+          <div class="card-visual card-visual--6"></div>
+          <div class="card-body">
+            <h2>Glacier Lake</h2>
+            <p>Patagonia, Argentina</p>
+          </div>
+        </article>
+      </div>
+
+      <p class="carousel-hint">Scroll horizontally inside the track, or drag with your pointer.</p>
+    </div>
+  </div>
+
+  <script src="/scroll/carousel/app.js"></script>
+</body>
+</html>

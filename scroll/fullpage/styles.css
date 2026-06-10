@@ -1,0 +1,135 @@
+/* -------------------------------------------------------------------------
+   Full-page vertical scroll snap
+   The .slides element is the scroll container; each .slide is a snap target.
+   ------------------------------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Scrollport: mandatory y-axis snapping */
+.slides {
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* Each slide is one viewport tall and snaps to the top edge */
+.slide {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 4rem 1.5rem 2rem;
+}
+
+.slide-inner {
+  max-width: 520px;
+  text-align: center;
+}
+
+.slide-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+}
+
+.slide h2 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+}
+
+.slide p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.slide-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.slide-link:hover {
+  text-decoration: underline;
+}
+
+/* Slide backgrounds */
+.slide--1 { background: linear-gradient(160deg, #1a1d27 0%, #1e2a4a 100%); }
+.slide--2 { background: linear-gradient(160deg, #1a2720 0%, #1a3d2b 100%); }
+.slide--3 { background: linear-gradient(160deg, #2a1f3d 0%, #3d1f4e 100%); }
+.slide--4 { background: linear-gradient(160deg, #1a2a3a 0%, #1e3a5f 100%); }
+.slide--5 { background: linear-gradient(160deg, #2a2018 0%, #5c3d1e 100%); }
+
+.scroll-hint {
+  display: block;
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  animation: bounce 2s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* Fixed nav over the scrollport */
+.demo-nav--overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: rgba(26, 29, 39, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Dot indicators */
+.slide-dots {
+  position: fixed;
+  right: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.slide-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.slide-dot:hover,
+.slide-dot.is-active {
+  background: var(--accent);
+  transform: scale(1.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slides {
+    scroll-behavior: auto;
+  }
+
+  .scroll-hint {
+    animation: none;
+  }
+}

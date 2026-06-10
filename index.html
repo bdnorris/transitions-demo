@@ -3,49 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>View Transition API Demo</title>
+  <title>Web Platform Demos</title>
   <link rel="stylesheet" href="styles/shared.css">
 </head>
 <body>
   <main class="hub">
     <header class="hub-header">
-      <p class="eyebrow">Web Platform Demo</p>
-      <h1>View Transition API</h1>
+      <p class="eyebrow">Web Platform Demos</p>
+      <h1>CSS &amp; API experiments</h1>
       <p class="lead">
-        Animated transitions between DOM states in a single page, and between
-        separate documents on navigation.
+        Interactive demos for the View Transition API and CSS scroll snap —
+        no frameworks, no build step.
       </p>
     </header>
 
-    <div class="demo-cards">
-      <a href="/spa/" class="demo-card">
-        <span class="demo-card-badge">SPA</span>
-        <h2>Single-document</h2>
-        <p>
-          Uses <code>document.startViewTransition()</code> to animate a gallery
-          grid into a detail view — including shared-element transitions via
-          <code>view-transition-name</code>.
-        </p>
-        <span class="demo-card-cta">Open demo →</span>
-      </a>
+    <section class="hub-section">
+      <h2 class="hub-section-title">View Transition API</h2>
+      <div class="demo-cards">
+        <a href="/spa/" class="demo-card">
+          <span class="demo-card-badge">SPA</span>
+          <h3>Single-document</h3>
+          <p>
+            Uses <code>document.startViewTransition()</code> to animate a gallery
+            grid into a detail view — including shared-element transitions via
+            <code>view-transition-name</code>.
+          </p>
+          <span class="demo-card-cta">Open demo →</span>
+        </a>
 
-      <a href="/mpa/" class="demo-card">
-        <span class="demo-card-badge">MPA</span>
-        <h2>Cross-document</h2>
-        <p>
-          Uses the <code>@view-transition</code> at-rule to opt pages into
-          animated navigation, with custom swipe and fade effects on
-          <code>::view-transition</code> pseudo-elements.
-        </p>
-        <span class="demo-card-cta">Open demo →</span>
-      </a>
-    </div>
+        <a href="/mpa/" class="demo-card">
+          <span class="demo-card-badge">MPA</span>
+          <h3>Cross-document</h3>
+          <p>
+            Uses the <code>@view-transition</code> at-rule to opt pages into
+            animated navigation, with custom swipe and fade effects on
+            <code>::view-transition</code> pseudo-elements.
+          </p>
+          <span class="demo-card-cta">Open demo →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="hub-section">
+      <h2 class="hub-section-title">CSS Scroll Snap</h2>
+      <div class="demo-cards">
+        <a href="/scroll/fullpage/" class="demo-card">
+          <span class="demo-card-badge">Vertical</span>
+          <h3>Full-page slides</h3>
+          <p>
+            Viewport-height sections with <code>scroll-snap-type: y mandatory</code>
+            — scroll wheel and touch flick snap to one slide at a time.
+          </p>
+          <span class="demo-card-cta">Open demo →</span>
+        </a>
+
+        <a href="/scroll/carousel/" class="demo-card">
+          <span class="demo-card-badge">Horizontal</span>
+          <h3>Carousel</h3>
+          <p>
+            A horizontal card track with <code>scroll-snap-type: x mandatory</code>
+            — drag, swipe, or arrow keys snap each card into place.
+          </p>
+          <span class="demo-card-cta">Open demo →</span>
+        </a>
+      </div>
+    </section>
 
     <footer class="hub-footer">
       <p>
-        Requires a browser with View Transition API support
-        (Chrome 111+ for SPA, Chrome 126+ for cross-document).
-        <a href="https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API" target="_blank" rel="noopener">MDN docs</a>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API" target="_blank" rel="noopener">View Transition API</a>
+        ·
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll_snap" target="_blank" rel="noopener">CSS scroll snap</a>
       </p>
     </footer>
   </main>

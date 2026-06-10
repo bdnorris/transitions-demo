@@ -1,0 +1,148 @@
+/* -------------------------------------------------------------------------
+   Horizontal scroll-snap carousel
+   .carousel is the scroll container; .carousel-card elements are snap targets.
+   ------------------------------------------------------------------------- */
+
+.carousel-page {
+  padding: 1.5rem 0 3rem;
+}
+
+.demo-intro {
+  color: var(--text-muted);
+  margin: 0 auto 1.5rem;
+  max-width: 960px;
+  padding: 0 1.5rem;
+  font-size: 0.95rem;
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.carousel-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-raised);
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, opacity 0.2s;
+}
+
+.carousel-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.carousel-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.carousel-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.carousel-counter {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  min-width: 3.5rem;
+  text-align: center;
+}
+
+/* Scrollport: horizontal mandatory snapping with hidden scrollbar */
+.carousel {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0.5rem 1.5rem 1.5rem;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Each card snaps to the leading edge of the scrollport */
+.carousel-card {
+  flex: 0 0 min(78vw, 340px);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.carousel:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Highlight the card nearest the scrollport center */
+.carousel-card.is-active {
+  border-color: var(--card-accent, var(--accent));
+}
+
+.card-visual {
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(
+    135deg,
+    var(--surface-raised),
+    color-mix(in srgb, var(--card-accent, var(--accent)) 40%, var(--surface-raised))
+  );
+}
+
+.card-visual--1 { background: linear-gradient(135deg, #1a4d3e, #4ade80); }
+.card-visual--2 { background: linear-gradient(135deg, #5c3d1e, #fbbf24); }
+.card-visual--3 { background: linear-gradient(135deg, #1e3a5f, #60a5fa); }
+.card-visual--4 { background: linear-gradient(135deg, #1f3d2b, #34d399); }
+.card-visual--5 { background: linear-gradient(135deg, #2d1f4e, #c084fc); }
+.card-visual--6 { background: linear-gradient(135deg, #1a3a4a, #22d3ee); }
+
+.card-body {
+  padding: 1rem 1.125rem 1.25rem;
+}
+
+.card-body h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.card-body p {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.carousel-hint {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 720px) {
+  .carousel-card {
+    flex-basis: 300px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel {
+    scroll-behavior: auto;
+  }
+}

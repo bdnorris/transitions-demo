@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full-page Scroll Snap — Demo</title>
+  <link rel="stylesheet" href="/styles/shared.css">
+  <link rel="stylesheet" href="/scroll/fullpage/styles.css">
+</head>
+<body>
+  <nav class="demo-nav demo-nav--overlay" aria-label="Demo navigation">
+    <a href="/">← All demos</a>
+    <h1>Full-page scroll snap</h1>
+    <span class="tag">Vertical</span>
+  </nav>
+
+  <!--
+    Scroll container: scroll-snap-type locks each gesture to one slide.
+    Each section is a snap target via scroll-snap-align: start.
+  -->
+  <main class="slides" id="slides">
+    <section class="slide slide--1" id="slide-1">
+      <div class="slide-inner">
+        <p class="slide-eyebrow">Slide 1 of 5</p>
+        <h2>Scroll down</h2>
+        <p>Each section fills the viewport. Mouse wheel, trackpad, or touch flick snaps to the next slide.</p>
+        <span class="scroll-hint" aria-hidden="true">↓</span>
+      </div>
+    </section>
+
+    <section class="slide slide--2" id="slide-2">
+      <div class="slide-inner">
+        <p class="slide-eyebrow">Slide 2 of 5</p>
+        <h2>CSS only</h2>
+        <p>
+          <code>scroll-snap-type: y mandatory</code> on the container and
+          <code>scroll-snap-align: start</code> on each section — no JavaScript required.
+        </p>
+      </div>
+    </section>
+
+    <section class="slide slide--3" id="slide-3">
+      <div class="slide-inner">
+        <p class="slide-eyebrow">Slide 3 of 5</p>
+        <h2>scroll-snap-stop</h2>
+        <p>
+          <code>scroll-snap-stop: always</code> prevents fast scrolling from
+          skipping past multiple slides in one gesture.
+        </p>
+      </div>
+    </section>
+
+    <section class="slide slide--4" id="slide-4">
+      <div class="slide-inner">
+        <p class="slide-eyebrow">Slide 4 of 5</p>
+        <h2>Full-width panels</h2>
+        <p>
+          Slides span the full viewport width and height — useful for landing pages,
+          onboarding flows, and presentation-style layouts.
+        </p>
+      </div>
+    </section>
+
+    <section class="slide slide--5" id="slide-5">
+      <div class="slide-inner">
+        <p class="slide-eyebrow">Slide 5 of 5</p>
+        <h2>That's it</h2>
+        <p>Scroll back up, or use the dots on the right to jump between slides.</p>
+        <a class="slide-link" href="/scroll/carousel/">Try the horizontal carousel →</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Dot nav uses scrollIntoView; scroll snap still handles wheel/touch. -->
+  <nav class="slide-dots" aria-label="Slide navigation">
+    <a href="#slide-1" class="slide-dot is-active" aria-label="Slide 1" aria-current="true"></a>
+    <a href="#slide-2" class="slide-dot" aria-label="Slide 2"></a>
+    <a href="#slide-3" class="slide-dot" aria-label="Slide 3"></a>
+    <a href="#slide-4" class="slide-dot" aria-label="Slide 4"></a>
+    <a href="#slide-5" class="slide-dot" aria-label="Slide 5"></a>
+  </nav>
+
+  <script src="/scroll/fullpage/app.js"></script>
+</body>
+</html>
