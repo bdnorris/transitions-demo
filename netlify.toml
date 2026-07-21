@@ -1,0 +1,10 @@
+# Static site — no build step, publish the repo root as-is.
+[build]
+  publish = "."
+
+# Pretty URLs 301-redirect ".html" paths to extensionless ones. A redirected
+# navigation causes Chrome to SKIP cross-document view transitions, so the
+# MPA demo animates on localhost but not on Netlify. Turning it off keeps the
+# ".html" links serving directly with no redirect.
+[build.processing.html]
+  pretty_urls = false
