@@ -167,8 +167,9 @@ function transitionTo(update) {
     return;
   }
   const transition = document.startViewTransition(update);
-  // Clean up names once the animation finishes so they don't linger.
-  transition.finished.then(clearTransitionNames);
+  // finished rejects with AbortError if the transition is skipped; swallow it,
+  // then clean up names either way so they don't linger.
+  transition.finished.catch(() => {}).finally(clearTransitionNames);
 }
 
 function bindEvents() {

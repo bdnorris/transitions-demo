@@ -98,6 +98,8 @@ window.addEventListener("pagereveal", (event) => {
 
   if (dest && /\/mpa\/?(index\.html)?$/.test(location.pathname)) {
     prepareIndexDestination(dest);
-    event.viewTransition.finished.then(clearHeroNames);
+    // finished rejects with AbortError if the browser skips the transition
+    // (e.g. a redirected navigation). Swallow it, then clear names either way.
+    event.viewTransition.finished.catch(() => {}).finally(clearHeroNames);
   }
 });
