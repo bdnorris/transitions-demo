@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imgix Video Demos</title>
+  <link rel="stylesheet" href="/styles/shared.css">
+  <link rel="stylesheet" href="/imgix-video/styles.css">
+</head>
+<body>
+  <div class="demo-shell">
+    <nav class="demo-nav">
+      <a href="/">← All demos</a>
+      <h1>Imgix video</h1>
+      <span class="tag">Video</span>
+    </nav>
+
+    <div class="demo-content video-demos">
+      <p class="demo-intro">
+        Demos of Imgix video delivery and transformations, all using the same
+        source file from
+        <a href="https://docs.imgix.com/en-US/getting-started/setup/video-api" target="_blank" rel="noopener">Imgix Video API</a>.
+      </p>
+
+      <!-- Demo 1: unmodified source video -->
+      <section class="video-demo" id="base">
+        <header class="video-demo-header">
+          <span class="demo-card-badge">Demo 1</span>
+          <h2>Base video</h2>
+          <p>
+            The source MP4 served as-is — no Imgix parameters applied.
+          </p>
+        </header>
+
+        <div class="video-frame">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <p class="video-url">
+          <code>https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4</code>
+        </p>
+      </section>
+
+      <!-- Demo 2: fm=mp4 + video-aq=enhanced -->
+      <section class="video-demo" id="auto-optimize">
+        <header class="video-demo-header">
+          <span class="demo-card-badge">Demo 2</span>
+          <h2>Auto-optimized MP4</h2>
+          <p>
+            <code>fm=mp4</code> re-encodes with H.264 and automatic bitrate selection.
+            <code>video-aq=enhanced</code> runs VMAF analysis first to pick the smallest
+            bitrate that still hits perceptual quality — typically 15–60% bandwidth savings
+            per the
+            <a href="https://docs.imgix.com/en-US/apis/video/overview" target="_blank" rel="noopener">Video API overview</a>.
+          </p>
+        </header>
+
+        <div class="video-frame">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=mp4&amp;video-aq=enhanced"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <p class="video-url">
+          <code>?fm=mp4&amp;video-aq=enhanced</code>
+        </p>
+      </section>
+
+      <!-- Demo 3: manual quality (intentionally low) -->
+      <section class="video-demo" id="manual-quality">
+        <header class="video-demo-header">
+          <span class="demo-card-badge">Demo 3</span>
+          <h2>Manual quality (<code>q=33</code>)</h2>
+          <p>
+            <code>q</code> sets output quality directly (default is <code>75</code>).
+            Here it’s set deliberately low so compression artifacts are easy to spot —
+            contrast with Demo 2’s automatic VMAF-based approach.
+          </p>
+        </header>
+
+        <div class="video-frame">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=mp4&amp;q=33"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <p class="video-url">
+          <code>?fm=mp4&amp;q=33</code>
+        </p>
+      </section>
+
+      <!-- Demo 4: slow motion with frame interpolation -->
+      <section class="video-demo" id="slow-motion">
+        <header class="video-demo-header">
+          <span class="demo-card-badge">Demo 4</span>
+          <h2>Slow motion (<code>video-speed=0.5</code>)</h2>
+          <p>
+            Half-speed playback via
+            <a href="https://docs.imgix.com/en-US/apis/video/video-speed" target="_blank" rel="noopener"><code>video-speed</code></a>.
+            Values below <code>1.0</code> enable frame interpolation by default, so motion
+            stays smooth instead of stuttering like a native player rate change.
+            Audio pitch is corrected automatically.
+          </p>
+        </header>
+
+        <div class="video-frame">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=mp4&amp;video-speed=0.5"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <p class="video-url">
+          <code>?fm=mp4&amp;video-speed=0.5</code>
+        </p>
+      </section>
+
+      <!-- Demo 5: AI video preview -->
+      <section class="video-demo" id="preview">
+        <header class="video-demo-header">
+          <span class="demo-card-badge">Demo 5</span>
+          <h2>Video preview</h2>
+          <p>
+            <a href="https://docs.imgix.com/en-US/apis/video/preview" target="_blank" rel="noopener"><code>video-preview=true</code></a>
+            uses AI to pick key segments and stitch them into a short highlight reel.
+            This build is ~5 seconds long with ~1-second segments
+            (<code>video-preview-duration=5</code>, <code>video-preview-segment-duration=1</code>).
+            First render may return <code>423</code> until processing finishes.
+          </p>
+        </header>
+
+        <div class="video-frame">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=mp4&amp;video-preview=true&amp;video-preview-duration=5&amp;video-preview-segment-duration=1"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <p class="video-url">
+          <code>?fm=mp4&amp;video-preview=true&amp;video-preview-duration=5&amp;video-preview-segment-duration=1</code>
+        </p>
+      </section>
+
+      <!-- Demo 6: AI-generated subtitles via sidecar VTT -->
+      <section class="video-demo" id="subtitles">
+        <header class="video-demo-header">
+          <span class="demo-card-badge">Demo 6</span>
+          <h2>Generated subtitles</h2>
+          <p>
+            <a href="https://docs.imgix.com/en-US/apis/video/subtitles/video-generate-subtitles" target="_blank" rel="noopener"><code>video-generate-subtitles=true</code></a>
+            transcribes the audio with AI. For a native <code>&lt;video&gt;</code> player,
+            request a sidecar WebVTT file with <code>fm=vtt</code> and load it via
+            a <code>&lt;track&gt;</code> element. Turn on CC in the player controls to see captions.
+            First VTT request may return <code>423</code> until transcription finishes.
+          </p>
+        </header>
+
+        <div class="video-frame">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            crossorigin="anonymous"
+            src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=mp4"
+          >
+            <track
+              kind="subtitles"
+              srclang="en"
+              label="English"
+              default
+              src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=vtt&amp;video-generate-subtitles=true"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <p class="video-url">
+          <code>video: ?fm=mp4</code><br />
+          <code>track: ?fm=vtt&amp;video-generate-subtitles=true</code>
+        </p>
+      </section>
+
+      <!-- Demo 7: clip a segment -->
+      <section class="video-demo" id="clip">
+        <header class="video-demo-header">
+          <span class="demo-card-badge">Demo 7</span>
+          <h2>Clip (10s–15s)</h2>
+          <p>
+            <a href="https://docs.imgix.com/en-US/apis/video/clip" target="_blank" rel="noopener">Clip parameters</a>
+            extract a segment of the source.
+            <code>video-clip-start=10</code> and <code>video-clip-end=15</code> trim to a
+            5-second clip from the middle of the spot.
+          </p>
+        </header>
+
+        <div class="video-frame">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=mp4&amp;video-clip-start=10&amp;video-clip-end=15"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <p class="video-url">
+          <code>?fm=mp4&amp;video-clip-start=10&amp;video-clip-end=15</code>
+        </p>
+      </section>
+
+      <!-- Demo 8: color filter preset -->
+      <section class="video-demo" id="filter">
+        <header class="video-demo-header">
+          <span class="demo-card-badge">Demo 8</span>
+          <h2>Video filter (<code>muted</code>)</h2>
+          <p>
+            <a href="https://docs.imgix.com/en-US/apis/video/color/video-filter" target="_blank" rel="noopener"><code>video-filter</code></a>
+            applies a named color grade. <code>muted</code> desaturates and crushes
+            shadows for a documentary / cinematic look.
+          </p>
+        </header>
+
+        <div class="video-frame">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=mp4&amp;video-filter=muted"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <p class="video-url">
+          <code>?fm=mp4&amp;video-filter=muted</code>
+        </p>
+
+        <div class="filter-presets">
+          <h3>Other presets</h3>
+          <ul>
+            <li>
+              <code>boost</code>
+              <span>Punchy and vivid — richer color, higher contrast. Good for social and marketing clips.</span>
+            </li>
+            <li>
+              <code>contrast</code>
+              <span>Crisper tonal separation — adds definition to flat footage.</span>
+            </li>
+            <li>
+              <code>darken</code>
+              <span>Lowers exposure — useful for dialing back a hot or overexposed shot.</span>
+            </li>
+            <li>
+              <code>lighten</code>
+              <span>Raises exposure — opens up dim or underexposed footage.</span>
+            </li>
+            <li>
+              <code>greyscale</code>
+              <span>Fully desaturated black-and-white (<code>grayscale</code> also works).</span>
+            </li>
+            <li>
+              <code>negative</code>
+              <span>Inverts all color values — photo-negative effect.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Demo 9: size to square — crop vs smart-crop -->
+      <section class="video-demo" id="size-square">
+        <header class="video-demo-header">
+          <span class="demo-card-badge">Demo 9</span>
+          <h2>Size to square</h2>
+          <p>
+            <a href="https://docs.imgix.com/en-US/apis/video/size" target="_blank" rel="noopener">Size</a>
+            to <code>720×720</code>.
+            <code>fit=crop</code> center-crops; <code>fit=smart-crop</code> AI subject-tracks
+            so the important content stays in frame.
+          </p>
+        </header>
+
+        <div class="square-compare">
+          <figure>
+            <figcaption><code>fit=crop</code></figcaption>
+            <div class="video-frame video-frame--square">
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=mp4&amp;w=720&amp;h=720&amp;fit=crop"
+              >
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="video-url"><code>?fm=mp4&amp;w=720&amp;h=720&amp;fit=crop</code></p>
+          </figure>
+          <figure>
+            <figcaption><code>fit=smart-crop</code></figcaption>
+            <div class="video-frame video-frame--square">
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=mp4&amp;w=720&amp;h=720&amp;fit=smart-crop"
+              >
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="video-url"><code>?fm=mp4&amp;w=720&amp;h=720&amp;fit=smart-crop</code></p>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Demo 10: fill square into HD -->
+      <section class="video-demo" id="fill-hd">
+        <header class="video-demo-header">
+          <span class="demo-card-badge">Demo 10</span>
+          <h2>Fill square → HD</h2>
+          <p>
+            Take a center square from the source (<code>rect</code>), then
+            <a href="https://docs.imgix.com/en-US/apis/video/fill" target="_blank" rel="noopener"><code>fit=fill</code></a>
+            pads it to standard HD (<code>1920×1080</code>) with
+            <code>fill=blur</code> on the sides — landscape canvas, square subject.
+          </p>
+        </header>
+
+        <div class="video-frame">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=mp4&amp;rect=center,middle,1080,1080&amp;w=1920&amp;h=1080&amp;fit=fill&amp;fill=blur&amp;fill-darken=20"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <p class="video-url">
+          <code>?fm=mp4&amp;rect=center,middle,1080,1080&amp;w=1920&amp;h=1080&amp;fit=fill&amp;fill=blur&amp;fill-darken=20</code>
+        </p>
+      </section>
+
+      <!-- Demo 11: basic spritesheet -->
+      <section class="video-demo" id="spritesheet">
+        <header class="video-demo-header">
+          <span class="demo-card-badge">Demo 11</span>
+          <h2>Spritesheet</h2>
+          <p>
+            <a href="https://docs.imgix.com/en-US/apis/video/spritesheets" target="_blank" rel="noopener"><code>fm=spritesheet</code></a>
+            returns a single image grid of frames sampled from the video.
+            <code>video-spritesheet-interval=auto</code> picks a sensible sampling rate
+            from the duration. Pair with <code>fm=vtt</code> for player seek-bar previews.
+          </p>
+        </header>
+
+        <div class="video-frame">
+          <img
+            src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=spritesheet&amp;video-spritesheet-interval=auto"
+            alt="Spritesheet grid of frames from the video"
+            loading="lazy"
+          />
+        </div>
+
+        <p class="video-url">
+          <code>?fm=spritesheet&amp;video-spritesheet-interval=auto</code>
+        </p>
+      </section>
+
+      <!-- Demo 12: text overlays -->
+      <section class="video-demo" id="text-overlay">
+        <header class="video-demo-header">
+          <span class="demo-card-badge">Demo 12</span>
+          <h2>Text overlays</h2>
+          <p>
+            <a href="https://docs.imgix.com/en-US/apis/video/text-overlays" target="_blank" rel="noopener"><code>txt-*</code></a>
+            composites text onto video frames — same params as the Rendering API.
+            Up to 10 layers via <code>txt[N]</code>. This demo stacks “Hello” and “World”
+            as two layers with <code>video-txt-transition=slideup</code> on entry.
+          </p>
+        </header>
+
+        <div class="video-frame">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=mp4&amp;txt=Hello&amp;txt-size=64&amp;txt-color=FFFFFF&amp;txt-align=center,middle&amp;txt-y=-40&amp;video-txt-transition=slideup&amp;txt[1]=World&amp;txt-size[1]=48&amp;txt-color[1]=FFD700&amp;txt-align[1]=center,middle&amp;txt-y[1]=40&amp;video-txt-transition[1]=slideup"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <p class="video-url">
+          <code>?fm=mp4&amp;txt=Hello&amp;txt-size=64&amp;txt-color=FFFFFF&amp;txt-align=center,middle&amp;txt-y=-40&amp;video-txt-transition=slideup&amp;txt[1]=World&amp;txt-size[1]=48&amp;txt-color[1]=FFD700&amp;txt-align[1]=center,middle&amp;txt-y[1]=40&amp;video-txt-transition[1]=slideup</code>
+        </p>
+      </section>
+
+      <!-- Demo 13: VFX bloom -->
+      <section class="video-demo" id="vfx">
+        <header class="video-demo-header">
+          <span class="demo-card-badge">Demo 13</span>
+          <h2>VFX bloom</h2>
+          <p>
+            <a href="https://docs.imgix.com/en-US/apis/video/vfx" target="_blank" rel="noopener">Video VFX</a>
+            are GPU cinematic effects (0–100 intensity).
+            <code>video-vfx-bloom=80</code> adds a strong dreamy glow around highlights.
+            Effects stack in a fixed order and run after color grade, before overlays.
+          </p>
+        </header>
+
+        <div class="video-frame">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=mp4&amp;video-vfx-bloom=80"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <p class="video-url">
+          <code>?fm=mp4&amp;video-vfx-bloom=80</code>
+        </p>
+
+        <div class="filter-presets">
+          <h3>Other effects</h3>
+          <ul>
+            <li>
+              <code>video-vfx-vignette</code>
+              <span>Radial corner darkening that pulls focus to the center of the frame.</span>
+            </li>
+            <li>
+              <code>video-vfx-film-grain</code>
+              <span>Analog film grain texture for a more tactile, vintage look.</span>
+            </li>
+            <li>
+              <code>video-vfx-halation</code>
+              <span>35mm-style glow bleed around bright highlights.</span>
+            </li>
+            <li>
+              <code>video-vfx-chromatic-aberration</code>
+              <span>RGB channel split for a glitchy / music-video edge.</span>
+            </li>
+          </ul>
+          <p class="vfx-order-note">
+            Compose order when stacked: chromatic aberration → film grain → bloom → halation → vignette.
+            Each accepts <code>0</code>–<code>100</code> intensity.
+          </p>
+        </div>
+      </section>
+
+      <!-- Demo 14: watermark -->
+      <section class="video-demo" id="watermark">
+        <header class="video-demo-header">
+          <span class="demo-card-badge">Demo 14</span>
+          <h2>Watermark</h2>
+          <p>
+            The
+            <a href="https://docs.imgix.com/en-US/apis/video/watermark" target="_blank" rel="noopener"><code>mark</code></a>
+            parameter overlays an image on the video.
+            <code>mark</code> takes a URL-encoded full image URL (same Imgix source works).
+            <code>mark-align=center,middle</code> centers it; <code>mark-w</code> sets the width.
+          </p>
+        </header>
+
+        <div class="video-frame">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="https://coloradopremium.imgix.net/video/25-cpr-42172_colorado_premium_meats_30sec%20(1080p).mp4?fm=mp4&amp;mark=https%3A%2F%2Fcoloradopremium.imgix.net%2F2026%2F06%2FoW8iUMpu-immersv.png&amp;mark-align=center,middle&amp;mark-w=480"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <p class="video-url">
+          <code>?fm=mp4&amp;mark=https%3A%2F%2Fcoloradopremium.imgix.net%2F2026%2F06%2FoW8iUMpu-immersv.png&amp;mark-align=center,middle&amp;mark-w=480</code>
+        </p>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
